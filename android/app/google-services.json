@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "52268043572",
+    "project_id": "pasteles-882b1",
+    "storage_bucket": "pasteles-882b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52268043572:android:9a90a977762692683aa961",
+        "android_client_info": {
+          "package_name": "com.example.pastel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdbunDIUcp-DfYZmnq1uW-2zvTEAYyZps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

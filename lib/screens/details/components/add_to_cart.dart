@@ -1,13 +1,40 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pastel/models/Product.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../../../constants.dart';
 
-class AddToCart extends StatelessWidget {
-  const AddToCart({super.key, required this.product});
-
+class AddToCart extends StatefulWidget {
   final Product product;
+  const AddToCart({Key? key, required this.product}) : super(key: key);
+
+  @override
+  State<AddToCart> createState() => _AddToCartState();
+}
+
+class _AddToCartState extends State<AddToCart> {
+  final firebaseDatabaseReference = FirebaseDatabase.instance.ref();
+
+  void sendDataToCart(Product product) {
+    // final productId = product.id;
+    final productImage = product.image;
+    final productName = product.title;
+    final productPrice = product.price;
+    final productDescripcion = product.description;
+
+    firebaseDatabaseReference.child('cart').child(productName).set({
+      // 'id': productId,
+      'image': productImage,
+      'name': productName,
+      'price': productPrice,
+      'description': productDescripcion,
+      'quantity': 1,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,15 +48,27 @@ class AddToCart extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               border: Border.all(
-                color: product.color,
+                color: widget.product.color,
               ),
             ),
             child: IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/add_to_cart.svg",
-                colorFilter: ColorFilter.mode(product.color, BlendMode.srcIn),
+                colorFilter:
+                    ColorFilter.mode(widget.product.color, BlendMode.srcIn),
               ),
-              onPressed: () {},
+              onPressed: () {
+                sendDataToCart(widget.product);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Producto agregado al carro',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    backgroundColor: yellowPastel, // Change the color here
+                  ),
+                );
+              },
             ),
           ),
           Expanded(
@@ -39,7 +78,7 @@ class AddToCart extends StatelessWidget {
                 minimumSize: Size(double.infinity, 48),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18)),
-                backgroundColor: product.color,
+                backgroundColor: widget.product.color,
               ),
               child: Text(
                 "Buy  Now".toUpperCase(),
