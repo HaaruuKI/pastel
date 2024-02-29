@@ -11,11 +11,16 @@ class CreateProductPage extends StatefulWidget {
 
 class _CreateProductPageState extends State<CreateProductPage> {
   TextEditingController _nameController = TextEditingController();
+  TextEditingController _priceController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
   Uint8List? _fileBytes;
   String? _fileName;
+  String? _imageUrl;
 
   Future<void> _saveProduct() async {
     String name = _nameController.text;
+    double price = double.parse(_priceController.text);
+    String description = _descriptionController.text;
 
     if (_fileBytes != null && name.isNotEmpty) {
       bool productExists = await _checkProductExists(name);
@@ -25,18 +30,20 @@ class _CreateProductPageState extends State<CreateProductPage> {
         return;
       }
 
-      // await _uploadFile();
-
       FirebaseFirestore firestore = FirebaseFirestore.instance;
-      CollectionReference productsCollection = firestore.collection('products');
+      DocumentReference<Map<String, dynamic>> productsCollection =
+          firestore.collection('products').doc(name);
 
-      await productsCollection.add({
+      await productsCollection.set({
         'name': name,
-        'img_url': 'gs://pasteles-882b1.appspot.com/uploads/$_fileName',
+        'price': price,
+        'description': description,
+        'img_url': _imageUrl,
       });
 
       print('Product saved');
     } else {
+      await _uploadFile();
       print('Please select a file and enter a name');
     }
   }
@@ -62,6 +69,15 @@ class _CreateProductPageState extends State<CreateProductPage> {
       await FirebaseStorage.instance
           .ref('uploads/$_fileName')
           .putData(_fileBytes!);
+
+      // Get download URL
+      String downloadUrl = await FirebaseStorage.instance
+          .ref('uploads/$_fileName')
+          .getDownloadURL();
+
+      setState(() {
+        _imageUrl = downloadUrl;
+      });
     }
   }
 
@@ -78,14 +94,37 @@ class _CreateProductPageState extends State<CreateProductPage> {
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: 'Product Name',
+                labelText: 'Name',
               ),
             ),
             SizedBox(height: 16.0),
+            TextField(
+              controller: _priceController,
+              decoration: InputDecoration(
+                labelText: 'Price',
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: _descriptionController,
+              decoration: InputDecoration(
+                labelText: 'Description',
+              ),
+            ),
             ElevatedButton(
               onPressed: _uploadFile,
               child: Text('Select File'),
             ),
+            SizedBox(height: 16.0),
+            _imageUrl != null
+                ? Image.network(
+                    _imageUrl!,
+                    width: 300, // Set the desired width
+                    height: 400, // Set the desired height
+                    fit: BoxFit
+                        .cover, // Adjust the image to fit the specified dimensions
+                  )
+                : Container(),
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: _saveProduct,

@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: 'crearProducto',
+      initialRoute: 'homePage',
     );
   }
 }
