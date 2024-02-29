@@ -48,14 +48,13 @@ class _AddToCartState extends State<AddToCart> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               border: Border.all(
-                color: widget.product.color,
+                color: yellowPastel,
               ),
             ),
             child: IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/add_to_cart.svg",
-                colorFilter:
-                    ColorFilter.mode(widget.product.color, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(yellowPastel, BlendMode.srcIn),
               ),
               onPressed: () {
                 sendDataToCart(widget.product);
@@ -78,7 +77,7 @@ class _AddToCartState extends State<AddToCart> {
                 minimumSize: Size(double.infinity, 48),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18)),
-                backgroundColor: widget.product.color,
+                backgroundColor: yellowPastel,
               ),
               child: Text(
                 "Buy  Now".toUpperCase(),

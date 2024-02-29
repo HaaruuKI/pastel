@@ -18,9 +18,9 @@ import 'package:pastel/routes/routes.dart';
 //   runApp(MyApp());
 // }
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());

@@ -19,9 +19,9 @@ class DetailsScreen extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       // each product have a color
-      backgroundColor: product.color,
+      backgroundColor: yellowPastel,
       appBar: AppBar(
-        backgroundColor: product.color,
+        backgroundColor: yellowPastel,
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pastel/constants.dart';
 
 import '../../models/Product.dart';
@@ -7,79 +6,85 @@ import '../details/details_screen.dart';
 import 'components/categorries.dart';
 import 'components/item_card.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class HomeScreen extends StatelessWidget {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        // leading: IconButton(
-        //   icon: SvgPicture.asset("assets/icons/back.svg"),
-        //   onPressed: () {},
-        // ),
-        actions: <Widget>[
-          IconButton(
-            icon: SvgPicture.asset(
-              "assets/icons/search.svg",
-              colorFilter: ColorFilter.mode(kTextColor, BlendMode.srcIn),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'search');
-            },
+          // ...
           ),
-          IconButton(
-            icon: SvgPicture.asset(
-              "assets/icons/cart.svg",
-              colorFilter: ColorFilter.mode(kTextColor, BlendMode.srcIn),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'cartStore');
-            },
-          ),
-          SizedBox(width: kDefaultPaddin / 2)
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-            child: Text(
-              "Reposteria",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Categories(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-              child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: kDefaultPaddin,
-                  crossAxisSpacing: kDefaultPaddin,
-                  childAspectRatio: 0.75,
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _firestore.collection('products').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) return const CircularProgressIndicator();
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+                child: Text(
+                  "Reposteria",
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
-                itemBuilder: (context, index) => ItemCard(
-                  product: products[index],
-                  press: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsScreen(
-                        product: products[index],
+              ),
+              Categories(),
+              Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+                  child: GridView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: kDefaultPaddin,
+                      crossAxisSpacing: kDefaultPaddin,
+                      childAspectRatio: 0.75,
+                    ),
+                    itemBuilder: (context, index) => ItemCard(
+                      product: Product(
+                        // id: snapshot.data!.docs[index].id,
+                        title: snapshot.data!.docs[index]['name'],
+                        description: snapshot.data!.docs[index]['description'],
+                        price: snapshot.data!.docs[index]['price'],
+                        image: snapshot.data!.docs[index]['img_url'],
+                        // size: snapshot.data!.docs[index]['size'].toDouble(),
+                        size: 1,
                       ),
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                              product: Product(
+                                // id: snapshot.data!.docs[index].id,
+                                title: snapshot.data!.docs[index]['name'],
+                                description: snapshot.data!.docs[index]
+                                    ['description'],
+                                price: snapshot.data!.docs[index]['price'],
+                                image: snapshot.data!.docs[index]['img_url'],
+                                // size: snapshot.data!.docs[index]['size']
+                                //     .toDouble(),
+                                size: 1,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
