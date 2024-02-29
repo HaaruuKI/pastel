@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pastel/constants.dart';
 import 'package:pastel/models/Product.dart';
 
@@ -24,19 +24,21 @@ class DetailsScreen extends StatelessWidget {
         backgroundColor: yellowPastel,
         elevation: 0,
         leading: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icons/back.svg',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-          ),
+          icon: Icon(CupertinoIcons.arrow_left),
+          // SvgPicture.asset(
+          //   'assets/icons/back.svg',
+          //   colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
           onPressed: () => Navigator.pop(context),
         ),
         actions: <Widget>[
           IconButton(
-            icon: SvgPicture.asset("assets/icons/search.svg"),
+            icon: Icon(CupertinoIcons.search),
+            // SvgPicture.asset("assets/icons/search.svg"),
             onPressed: () {},
           ),
           IconButton(
-            icon: SvgPicture.asset("assets/icons/cart.svg"),
+            icon: Icon(CupertinoIcons.cart),
+            // SvgPicture.asset("assets/icons/search.svg"),
             onPressed: () {},
           ),
           SizedBox(width: kDefaultPaddin / 2)

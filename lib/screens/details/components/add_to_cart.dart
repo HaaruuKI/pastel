@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pastel/models/Product.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -9,7 +9,7 @@ import '../../../constants.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
-  const AddToCart({Key? key, required this.product}) : super(key: key);
+  const AddToCart({super.key, required this.product});
 
   @override
   State<AddToCart> createState() => _AddToCartState();
@@ -42,20 +42,21 @@ class _AddToCartState extends State<AddToCart> {
       child: Row(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(right: kDefaultPaddin),
+            margin: const EdgeInsets.only(right: kDefaultPaddin),
             height: 50,
             width: 58,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               border: Border.all(
-                color: yellowPastel,
+                color: Colors.black,
               ),
             ),
             child: IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/add_to_cart.svg",
-                colorFilter: ColorFilter.mode(yellowPastel, BlendMode.srcIn),
-              ),
+              icon: const Icon(CupertinoIcons.cart),
+              // SvgPicture.asset(
+              //   "assets/icons/add_to_cart.svg",
+              //   colorFilter: ColorFilter.mode(yellowPastel, BlendMode.srcIn),
+              // ),
               onPressed: () {
                 sendDataToCart(widget.product);
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -74,16 +75,16 @@ class _AddToCartState extends State<AddToCart> {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 48),
+                minimumSize: const Size(double.infinity, 48),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18)),
                 backgroundColor: yellowPastel,
               ),
               child: Text(
                 "Buy  Now".toUpperCase(),
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),

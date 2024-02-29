@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 import 'package:pastel/models/Product.dart';
 
@@ -23,7 +25,7 @@ class ProductTitleWithImage extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: kDefaultPaddin),
           Row(
@@ -31,19 +33,20 @@ class ProductTitleWithImage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: "Price\n"),
+                    const TextSpan(
+                        text: "Price\n", style: TextStyle(color: Colors.black)),
                     TextSpan(
                       text: "\$${product.price}",
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
                           .copyWith(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                              color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: kDefaultPaddin),
+              const SizedBox(width: kDefaultPaddin),
               Expanded(
                 child: Hero(
                   tag: "${product.title}",
