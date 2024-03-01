@@ -34,12 +34,16 @@ class DetailsScreen extends StatelessWidget {
           IconButton(
             icon: Icon(CupertinoIcons.search),
             // SvgPicture.asset("assets/icons/search.svg"),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, 'search');
+            },
           ),
           IconButton(
             icon: Icon(CupertinoIcons.cart),
             // SvgPicture.asset("assets/icons/search.svg"),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, 'cartStore');
+            },
           ),
           SizedBox(width: kDefaultPaddin / 2)
         ],
@@ -72,9 +76,9 @@ class DetailsScreen extends StatelessWidget {
                         SizedBox(height: kDefaultPaddin / 2),
                         Description(product: product),
                         SizedBox(height: kDefaultPaddin / 2),
-                        CounterWithFavBtn(),
+                        AddToCart(product: product),
                         SizedBox(height: kDefaultPaddin / 2),
-                        AddToCart(product: product)
+                        CounterWithFavBtn(),
                       ],
                     ),
                   ),

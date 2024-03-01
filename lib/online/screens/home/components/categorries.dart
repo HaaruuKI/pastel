@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 // We need satefull widget for our categories
 
@@ -12,7 +12,8 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> {
   List<String> categories = [
     "Pasteles",
-    // "Snacks"
+    "PerfilGuest",
+    "Pefil",
   ];
   // By default our first item will be selected
   int selectedIndex = 0;
@@ -37,6 +38,13 @@ class _CategoriesState extends State<Categories> {
         setState(() {
           selectedIndex = index;
         });
+        if (index == 0) {
+          Navigator.pushNamed(context, 'homePage');
+        } else if (index == 1) {
+          Navigator.pushNamed(context, 'profileGuets');
+        } else if (index == 2) {
+          Navigator.pushNamed(context, 'profile');
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),

@@ -1,11 +1,11 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, non_constant_identifier_names
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pastel/models/Product.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
@@ -73,7 +73,10 @@ class _AddToCartState extends State<AddToCart> {
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                sendDataToCart(widget.product);
+                Navigator.pushNamed(context, 'cartStore');
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48),
                 shape: RoundedRectangleBorder(

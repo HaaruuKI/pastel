@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pastel/constants.dart';
+import 'package:pastel/online/screens/home/components/app_bar.dart';
 
-import '../../models/Product.dart';
+import '../../../models/Product.dart';
 import '../details/details_screen.dart';
 import 'components/categorries.dart';
 import 'components/item_card.dart';
@@ -14,17 +15,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          // ...
-          ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore.collection('products').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) return const CircularProgressIndicator();
-
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              CustomAppBar(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
                 child: Text(

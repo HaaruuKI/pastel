@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pastel/models/Product.dart';
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({super.key, required this.product, required this.press});

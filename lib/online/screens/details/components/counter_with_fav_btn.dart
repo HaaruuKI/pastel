@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'cart_counter.dart';
-
 class CounterWithFavBtn extends StatefulWidget {
   @override
   _CounterWithFavBtnState createState() => _CounterWithFavBtnState();
@@ -14,9 +12,9 @@ class _CounterWithFavBtnState extends State<CounterWithFavBtn> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        CartCounter(),
+        // CartCounter(),
         InkWell(
           onTap: () {
             setState(() {
