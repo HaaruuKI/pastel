@@ -5,14 +5,14 @@ import 'package:pastel/constants.dart';
 
 // We need satefull widget for our categories
 
-class Categories extends StatefulWidget {
-  const Categories({super.key});
+class CategoriesGuest extends StatefulWidget {
+  const CategoriesGuest({super.key});
 
   @override
-  _CategoriesState createState() => _CategoriesState();
+  _CategoriesGuestState createState() => _CategoriesGuestState();
 }
 
-class _CategoriesState extends State<Categories> {
+class _CategoriesGuestState extends State<CategoriesGuest> {
   List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
   // By default our first item will be selected
   int selectedIndex = 0;

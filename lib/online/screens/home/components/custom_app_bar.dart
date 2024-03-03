@@ -10,13 +10,6 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       // backgroundColor: yellowPastel,
       elevation: 0,
-      // leading: IconButton(
-      //   icon: Icon(CupertinoIcons.arrow_left),
-      //   // SvgPicture.asset(
-      //   //   'assets/icons/back.svg',
-      //   //   colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-      //   onPressed: () => Navigator.pushNamed(context, 'homePage'),
-      // ),
       actions: <Widget>[
         IconButton(
           icon: Icon(CupertinoIcons.search),

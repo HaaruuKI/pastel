@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -64,49 +65,89 @@ class _ProfieUserState extends State<ProfieUser> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Column(
+            if (user != null)
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                    'https://img.freepik.com/vector-premium/icono-perfil-usuario-estilo-plano-ilustracion-vector-avatar-miembro-sobre-fondo-aislado-concepto-negocio-signo-permiso-humano_157943-15752.jpg'),
+              ),
+            SizedBox(height: 16),
+            Text(
+              userName,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              userEmail,
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 30),
-                if (user != null)
-                  Column(
-                    children: [
-                      Text(userName, style: const TextStyle(fontSize: 24)),
-                      Text(userEmail, style: const TextStyle(fontSize: 18)),
-                    ],
-                  ),
-                // TextButton(
+                // IconButton(
+                //   icon: Icon(CupertinoIcons.person_alt_circle, size: 50),
                 //   onPressed: () {},
-                //   child: const Text(
-                //     'Configuraciones',
-                //     style: TextStyle(fontSize: 20, color: Colors.black),
-                //   ),
                 // ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'historial');
+                // IconButton(
+                //   icon: Icon(CupertinoIcons.settings, size: 50),
+                //   onPressed: () {},
+                // ),
+                IconButton(
+                  icon: Icon(CupertinoIcons.square_arrow_right, size: 50),
+                  onPressed: () async {
+                    await _auth.signOut();
+                    await _googleSignIn.signOut();
+                    Navigator.pushNamed(context, 'navBar');
                   },
-                  child: const Text(
-                    'Historial de ordenes',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
                 ),
-                const SizedBox(height: 30),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () async {
-                      await _auth.signOut();
-                      await _googleSignIn.signOut();
-                      Navigator.pushNamed(context, 'menu');
-                    },
-                    child: const Text("Cerrar sesion"),
-                  ),
-                )
               ],
             ),
           ],
         ),
+        //   children: [
+        //     Column(
+        //       children: [
+        //         const SizedBox(height: 30),
+        //         if (user != null)
+        //           Column(
+        //             children: [
+        //               Text(userName, style: const TextStyle(fontSize: 24)),
+        //               Text(userEmail, style: const TextStyle(fontSize: 18)),
+        //             ],
+        //           ),
+        //         // TextButton(
+        //         //   onPressed: () {},
+        //         //   child: const Text(
+        //         //     'Configuraciones',
+        //         //     style: TextStyle(fontSize: 20, color: Colors.black),
+        //         //   ),
+        //         // ),
+        //         const SizedBox(height: 20),
+        //         TextButton(
+        //           onPressed: () {
+        //             Navigator.pushNamed(context, 'historial');
+        //           },
+        //           child: const Text(
+        //             'Historial de ordenes',
+        //             style: TextStyle(fontSize: 20, color: Colors.black),
+        //           ),
+        //         ),
+        //         const SizedBox(height: 30),
+        //         Align(
+        //           alignment: Alignment.center,
+        //           child: TextButton(
+        //             onPressed: () async {
+        //               await _auth.signOut();
+        //               await _googleSignIn.signOut();
+        //               Navigator.pushNamed(context, 'menu');
+        //             },
+        //             child: const Text("Cerrar sesion"),
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

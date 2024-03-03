@@ -1,17 +1,15 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:pastel/constants.dart';
-import 'package:pastel/online/screens/home/components/custom_app_bar.dart';
+import 'package:pastel/offline/screens/home/components/custom_app_bar_guest.dart';
 
-import '../../../models/Product.dart';
+import '../../../../models/Product.dart';
 import '../details/details_screen.dart';
 // import 'components/categorries.dart';
 import 'components/item_card.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreenGuest extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -24,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CustomAppBar(),
+              CustomAppBarGuest(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
                 child: Text(
@@ -35,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
-              // Categories(),
+              // CategoriesGuest(),
               Expanded(
                 child: Padding(
                   padding:
@@ -48,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisSpacing: kDefaultPaddin,
                       childAspectRatio: 0.75,
                     ),
-                    itemBuilder: (context, index) => ItemCard(
+                    itemBuilder: (context, index) => ItemCardGuest(
                       product: Product(
                         // id: snapshot.data!.docs[index].id,
                         title: snapshot.data!.docs[index]['name'],

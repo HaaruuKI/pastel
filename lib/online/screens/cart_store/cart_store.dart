@@ -5,7 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pastel/constants.dart';
-import 'package:pastel/online/screens/home/components/app_bar.dart';
+import 'package:pastel/online/screens/home/components/custom_app_bar.dart';
 
 class CartStore extends StatefulWidget {
   const CartStore({super.key});

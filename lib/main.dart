@@ -1,3 +1,4 @@
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pastel/constants.dart';
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: 'homePage',
+      initialRoute: 'navBar',
+      // FirebaseAuth.instance.currentUser != null
+      //     ? 'homePage'
+      //     : 'homePageGuest',
     );
   }
 }
