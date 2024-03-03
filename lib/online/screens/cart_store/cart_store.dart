@@ -47,9 +47,9 @@ class _CartStoreState extends State<CartStore> {
         final product = Map<String, dynamic>.from(value as dynamic);
         items.add({
           'key': key,
-          'name': product['nombre'],
-          'price': product['precio'],
-          'img': product['imagen'],
+          'name': product['name'],
+          'price': product['price'],
+          'img': product['image'],
           'quantity': product['quantity'],
         });
       });
@@ -60,7 +60,7 @@ class _CartStoreState extends State<CartStore> {
           totalPrice = 0;
           for (final item in items) {
             totalQuantity += item['quantity'];
-            totalPrice += item['quantity'] * item['price'];
+            totalPrice += item['quantity'] * item['price'].toDouble();
           }
           totalQuantity = totalQuantity.toDouble();
           totalPrice = totalPrice.toDouble();
@@ -137,7 +137,7 @@ class _CartStoreState extends State<CartStore> {
           Padding(
             padding: EdgeInsets.only(top: 0, left: 5, bottom: 5),
             child: Text(
-              'Lista de ordenes',
+              'Carrito',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),
@@ -203,6 +203,38 @@ class _CartStoreState extends State<CartStore> {
                                             ),
                                           ]),
                                     ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 13),
+                                          InkWell(
+                                            onTap: () {
+                                              _incrementQuantity(item['key']);
+                                            },
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${item['quantity']}',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              _decrementQuantity(item['key']);
+                                            },
+                                            child: Icon(
+                                              Icons.remove,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -227,14 +259,14 @@ class _CartStoreState extends State<CartStore> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(children: [
               Text(
-                'Total:',
+                'Cantidad:',
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 width: 15,
               ),
               Text(
-                '\$ {price ?? ' '}',
+                totalQuantity.toStringAsFixed(0),
                 style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold,
@@ -261,7 +293,7 @@ class _CartStoreState extends State<CartStore> {
                 color: Colors.black,
               ),
               label: Text(
-                'Comprar',
+                '\$${totalPrice.toStringAsFixed(2)}',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,

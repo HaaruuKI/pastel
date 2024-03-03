@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pastel/models/Product.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../../../constants.dart';
@@ -17,22 +18,29 @@ class AddToCart extends StatefulWidget {
 
 class _AddToCartState extends State<AddToCart> {
   final firebaseDatabaseReference = FirebaseDatabase.instance.ref();
+  final firebaseAuth = FirebaseAuth.instance;
 
   void sendDataToCart(Product product) {
-    // final productId = product.id;
-    final productImage = product.image;
-    final productName = product.title;
-    final productPrice = product.price;
-    final productDescripcion = product.description;
+    final user = firebaseAuth.currentUser;
+    if (user != null) {
+      final userId = user.uid;
+      final productImage = product.image;
+      final productName = product.title;
+      final productPrice = product.price;
+      final productDescripcion = product.description;
 
-    firebaseDatabaseReference.child('cart').child(productName).set({
-      // 'id': productId,
-      'image': productImage,
-      'name': productName,
-      'price': productPrice,
-      'description': productDescripcion,
-      'quantity': 1,
-    });
+      firebaseDatabaseReference
+          .child('cart')
+          .child(userId)
+          .child(productName)
+          .set({
+        'image': productImage,
+        'name': productName,
+        'price': productPrice,
+        'description': productDescripcion,
+        'quantity': 1,
+      });
+    }
   }
 
   @override
@@ -53,10 +61,6 @@ class _AddToCartState extends State<AddToCart> {
             ),
             child: IconButton(
               icon: const Icon(CupertinoIcons.cart),
-              // SvgPicture.asset(
-              //   "assets/icons/add_to_cart.svg",
-              //   colorFilter: ColorFilter.mode(yellowPastel, BlendMode.srcIn),
-              // ),
               onPressed: () {
                 sendDataToCart(widget.product);
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -65,7 +69,7 @@ class _AddToCartState extends State<AddToCart> {
                       'Producto agregado al carro',
                       style: TextStyle(color: Colors.black),
                     ),
-                    backgroundColor: yellowPastel, // Change the color here
+                    backgroundColor: yellowPastel,
                   ),
                 );
               },
