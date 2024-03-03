@@ -160,7 +160,7 @@ class _CartStoreState extends State<CartStore> {
                                 width: 400,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: yellowPastel,
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
@@ -198,7 +198,7 @@ class _CartStoreState extends State<CartStore> {
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
-                                                color: yellowPastel,
+                                                color: Colors.black,
                                               ),
                                             ),
                                           ]),
