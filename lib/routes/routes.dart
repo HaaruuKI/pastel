@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pastel/nav_bar.dart';
 import 'package:pastel/offline/screens/home/home_screen_guest.dart';
 import 'package:pastel/offline/screens/profile/profile_user_guest.dart';
+import 'package:pastel/offline/screens/register/register.dart';
 import 'package:pastel/offline/screens/search/search.dart';
 import 'package:pastel/online/screens/profile/profile_user.dart';
 import 'package:pastel/product_create/create_product.dart';
@@ -24,4 +25,6 @@ final routes = <String, WidgetBuilder>{
 
   // inicializador
   'navBar': (BuildContext context) => const NavBar(),
+
+  'register': (BuildContext context) => const RegisterScreen(),
 };

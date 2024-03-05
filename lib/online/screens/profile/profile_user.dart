@@ -45,7 +45,7 @@ class _ProfieUserState extends State<ProfieUser> {
 
   Future<void> _getEmailPasswordUserData() async {
     final userData = await FirebaseFirestore.instance
-        .collection('Users')
+        .collection('users')
         .doc(user!.uid)
         .get();
     if (userData.exists) {

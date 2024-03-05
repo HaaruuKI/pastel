@@ -48,7 +48,7 @@ class DefaultFirebaseOptions {
     appId: '1:52268043572:web:cbf2b78dee4fea353aa961',
     messagingSenderId: '52268043572',
     projectId: 'pasteles-882b1',
-    authDomain: 'pasteles-882b1.firebaseapp.com',
+    authDomain: "pasteles-882b1.firebaseapp.com",
     storageBucket: 'pasteles-882b1.appspot.com',
   );
 
