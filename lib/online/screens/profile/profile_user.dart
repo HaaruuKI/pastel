@@ -84,14 +84,6 @@ class _ProfieUserState extends State<ProfieUser> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // IconButton(
-                //   icon: Icon(CupertinoIcons.person_alt_circle, size: 50),
-                //   onPressed: () {},
-                // ),
-                // IconButton(
-                //   icon: Icon(CupertinoIcons.settings, size: 50),
-                //   onPressed: () {},
-                // ),
                 IconButton(
                   icon: Icon(CupertinoIcons.square_arrow_right, size: 50),
                   onPressed: () async {
@@ -104,50 +96,6 @@ class _ProfieUserState extends State<ProfieUser> {
             ),
           ],
         ),
-        //   children: [
-        //     Column(
-        //       children: [
-        //         const SizedBox(height: 30),
-        //         if (user != null)
-        //           Column(
-        //             children: [
-        //               Text(userName, style: const TextStyle(fontSize: 24)),
-        //               Text(userEmail, style: const TextStyle(fontSize: 18)),
-        //             ],
-        //           ),
-        //         // TextButton(
-        //         //   onPressed: () {},
-        //         //   child: const Text(
-        //         //     'Configuraciones',
-        //         //     style: TextStyle(fontSize: 20, color: Colors.black),
-        //         //   ),
-        //         // ),
-        //         const SizedBox(height: 20),
-        //         TextButton(
-        //           onPressed: () {
-        //             Navigator.pushNamed(context, 'historial');
-        //           },
-        //           child: const Text(
-        //             'Historial de ordenes',
-        //             style: TextStyle(fontSize: 20, color: Colors.black),
-        //           ),
-        //         ),
-        //         const SizedBox(height: 30),
-        //         Align(
-        //           alignment: Alignment.center,
-        //           child: TextButton(
-        //             onPressed: () async {
-        //               await _auth.signOut();
-        //               await _googleSignIn.signOut();
-        //               Navigator.pushNamed(context, 'menu');
-        //             },
-        //             child: const Text("Cerrar sesion"),
-        //           ),
-        //         )
-        //       ],
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }
