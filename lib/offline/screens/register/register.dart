@@ -19,21 +19,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Firebase Register'),
+        title: const Text('Register'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
+            TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            TextFormField(
               controller: _passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               obscureText: true,
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            TextFormField(
               controller: _nameController,
               decoration: const InputDecoration(
                 labelText: 'Name',
@@ -49,9 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                _registerWithEmailAndPassword();
-              },
+              onPressed: _registerWithEmailAndPassword,
               child: const Text('Register'),
             ),
           ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileUserGuest extends StatefulWidget {
-  const ProfileUserGuest({super.key});
+  const ProfileUserGuest({Key? key}) : super(key: key);
 
   @override
   _ProfileUserGuestState createState() => _ProfileUserGuestState();
@@ -18,7 +18,7 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Firebase Login'),
+        title: const Text('Iniciar sesión'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -27,15 +27,17 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
           children: [
             TextField(
               controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
+              decoration: InputDecoration(
+                labelText: 'Correo electrónico',
+                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              decoration: InputDecoration(
+                labelText: 'Constraseña',
+                border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
@@ -44,12 +46,21 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
               onPressed: () {
                 _signInWithEmailAndPassword();
               },
-              child: const Text('Sign In'),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+              ),
+              child: const Text('Iniciar sesion'),
             ),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, 'register');
               },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.grey,
+              ),
               child: const Text('Registrarse'),
             ),
           ],
@@ -72,12 +83,6 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
       final User? user = userCredential.user;
 
       if (user != null) {
-        // El inicio de sesión fue exitoso, puedes redirigir a la siguiente pantalla
-        // Navigator.pushNamed(context, 'nextScreen');
-        // print('Registration successful: ${user.uid}');
-        // print('Registration successful: ${user.email}');
-
-        // Get the user's data from Firestore
         final DocumentSnapshot snapshot = await FirebaseFirestore.instance
             .collection('users')
             .doc(user.uid)
@@ -93,11 +98,9 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
 
         Navigator.pushNamed(context, 'navBar');
       } else {
-        // El inicio de sesión falló
         print('Inicio de sesión fallido');
       }
     } catch (e) {
-      // Ocurrió un error durante el inicio de sesión
       print('Error durante el inicio de sesión: $e');
     }
   }
