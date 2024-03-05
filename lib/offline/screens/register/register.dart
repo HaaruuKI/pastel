@@ -20,6 +20,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,14 +35,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
-                labelText: 'Email',
+                labelText: 'Correo electronico',
               ),
             ),
             const SizedBox(height: 16.0),
             TextFormField(
               controller: _passwordController,
               decoration: const InputDecoration(
-                labelText: 'Password',
+                labelText: 'Contraseña',
               ),
               obscureText: true,
             ),
@@ -44,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextFormField(
               controller: _nameController,
               decoration: const InputDecoration(
-                labelText: 'Name',
+                labelText: 'Nombre',
               ),
             ),
             const SizedBox(height: 16.0),

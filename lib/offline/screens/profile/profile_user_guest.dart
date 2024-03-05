@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pastel/constants.dart';
 
 class ProfileUserGuest extends StatefulWidget {
   const ProfileUserGuest({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                _signInWithEmailAndPassword();
+                _signInWithEmailAndPassword(context);
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -69,7 +70,7 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
     );
   }
 
-  Future<void> _signInWithEmailAndPassword() async {
+  Future<void> _signInWithEmailAndPassword(BuildContext context) async {
     try {
       final String email = _emailController.text.trim();
       final String password = _passwordController.text.trim();
@@ -91,17 +92,49 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
         if (snapshot.exists) {
           final userData = snapshot.data();
           final String? userName = (userData as Map<String, dynamic>)['name'];
-          print('User Name: $userName');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: yellowPastel,
+              content: Text(
+                'Inicio de sesión exitoso. Usuario: $userName',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          );
         } else {
-          print('User data not found');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: yellowPastel,
+              content: const Text(
+                'Datos de usuario no encontrados',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          );
         }
 
         Navigator.pushNamed(context, 'navBar');
       } else {
-        print('Inicio de sesión fallido');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: yellowPastel,
+            content: const Text(
+              'Inicio de sesión fallido',
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        );
       }
     } catch (e) {
-      print('Error durante el inicio de sesión: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: yellowPastel,
+          content: Text(
+            'Error durante el inicio de sesión: $e',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+      );
     }
   }
 }
