@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:pastel/feactures/app/constants.dart';
 import 'package:pastel/feactures/app/pages/home/components/custom_app_bar.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../auth/models/Product.dart';
 import '../details/details_screen.dart';
@@ -59,24 +60,43 @@ class HomeScreen extends StatelessWidget {
                         size: 1,
                       ),
                       press: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsScreen(
-                              product: Product(
-                                // id: snapshot.data!.docs[index].id,
-                                title: snapshot.data!.docs[index]['name'],
-                                description: snapshot.data!.docs[index]
-                                    ['description'],
-                                price: snapshot.data!.docs[index]['price'],
-                                image: snapshot.data!.docs[index]['img_url'],
-                                // size: snapshot.data!.docs[index]['size']
-                                //     .toDouble(),
-                                size: 1,
-                              ),
+                          screen: DetailsScreen(
+                            product: Product(
+                              // id: snapshot.data!.docs[index].id,
+                              title: snapshot.data!.docs[index]['name'],
+                              description: snapshot.data!.docs[index]
+                                  ['description'],
+                              price: snapshot.data!.docs[index]['price'],
+                              image: snapshot.data!.docs[index]['img_url'],
+                              // size: snapshot.data!.docs[index]['size']
+                              //     .toDouble(),
+                              size: 1,
                             ),
                           ),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
+                        // // Navigator.push(
+                        // //   context,
+                        // //   MaterialPageRoute(
+                        // //     builder: (context) => DetailsScreen(
+                        // //       product: Product(
+                        // //         // id: snapshot.data!.docs[index].id,
+                        // //         title: snapshot.data!.docs[index]['name'],
+                        // //         description: snapshot.data!.docs[index]
+                        // //             ['description'],
+                        // //         price: snapshot.data!.docs[index]['price'],
+                        // //         image: snapshot.data!.docs[index]['img_url'],
+                        // //         // size: snapshot.data!.docs[index]['size']
+                        // //         //     .toDouble(),
+                        // //         size: 1,
+                        // //       ),
+                        // //     ),
+                        // //   ),
+                        // );
                       },
                     ),
                   ),
