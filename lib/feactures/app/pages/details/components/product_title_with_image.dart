@@ -1,9 +1,9 @@
 // ignore_for_file: unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
-import 'package:pastel/models/Product.dart';
+import 'package:pastel/feactures/auth/models/Product.dart';
 
-import '../../../../constants.dart';
+import '../../../constants.dart';
 
 class ProductTitleWithImage extends StatelessWidget {
   const ProductTitleWithImage({super.key, required this.product});

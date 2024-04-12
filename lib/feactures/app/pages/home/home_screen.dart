@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:pastel/constants.dart';
-import 'package:pastel/online/screens/home/components/custom_app_bar.dart';
+import 'package:pastel/feactures/app/constants.dart';
+import 'package:pastel/feactures/app/pages/home/components/custom_app_bar.dart';
 
-import '../../../models/Product.dart';
+import '../../../auth/models/Product.dart';
 import '../details/details_screen.dart';
 // import 'components/categorries.dart';
 import 'components/item_card.dart';

@@ -44,12 +44,13 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDth1VpVEf4ABoLf1SqnPFLgFyFHlBDFXE',
-    appId: '1:52268043572:web:cbf2b78dee4fea353aa961',
-    messagingSenderId: '52268043572',
-    projectId: 'pasteles-882b1',
+    apiKey: "AIzaSyDth1VpVEf4ABoLf1SqnPFLgFyFHlBDFXE",
     authDomain: "pasteles-882b1.firebaseapp.com",
-    storageBucket: 'pasteles-882b1.appspot.com',
+    databaseURL: "https://pasteles-882b1-default-rtdb.firebaseio.com",
+    projectId: "pasteles-882b1",
+    storageBucket: "pasteles-882b1.appspot.com",
+    messagingSenderId: "52268043572",
+    appId: "1:52268043572:web:cbf2b78dee4fea353aa961",
   );
 
   static const FirebaseOptions android = FirebaseOptions(

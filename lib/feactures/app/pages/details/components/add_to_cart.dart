@@ -2,11 +2,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pastel/models/Product.dart';
+import 'package:pastel/feactures/auth/models/Product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import '../../../../constants.dart';
+import '../../../constants.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
@@ -62,24 +62,32 @@ class _AddToCartState extends State<AddToCart> {
             child: IconButton(
               icon: const Icon(CupertinoIcons.cart),
               onPressed: () {
-                sendDataToCart(widget.product);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Producto agregado al carro',
-                      style: TextStyle(color: Colors.black),
+                if (FirebaseAuth.instance.currentUser != null) {
+                  sendDataToCart(widget.product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Producto agregado al carro',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      backgroundColor: yellowPastel,
                     ),
-                    backgroundColor: yellowPastel,
-                  ),
-                );
+                  );
+                } else {
+                  Navigator.pushNamed(context, 'profile');
+                }
               },
             ),
           ),
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                sendDataToCart(widget.product);
-                Navigator.pushNamed(context, 'cartStore');
+                if (FirebaseAuth.instance.currentUser != null) {
+                  sendDataToCart(widget.product);
+                  Navigator.pushNamed(context, 'cartStore');
+                } else {
+                  Navigator.pushNamed(context, 'profile');
+                }
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48),

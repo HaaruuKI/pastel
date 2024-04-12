@@ -2,10 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pastel/models/Product.dart';
+import 'package:pastel/feactures/auth/models/Product.dart';
 // import 'package:firebase_database/firebase_database.dart';
 
-import '../../../../../constants.dart';
+import '../../../../feactures/app/constants.dart';
 
 class AddToCartGuest extends StatefulWidget {
   final Product product;

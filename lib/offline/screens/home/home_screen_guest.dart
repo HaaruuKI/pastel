@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pastel/constants.dart';
+import 'package:pastel/feactures/app/constants.dart';
 import 'package:pastel/offline/screens/home/components/custom_app_bar_guest.dart';
 
-import '../../../../models/Product.dart';
+import '../../../feactures/auth/models/Product.dart';
 import '../details/details_screen.dart';
 // import 'components/categorries.dart';
 import 'components/item_card.dart';

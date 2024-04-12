@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pastel/constants.dart';
-import 'package:pastel/models/Product.dart';
+import 'package:pastel/feactures/app/constants.dart';
+import 'package:pastel/feactures/auth/models/Product.dart';
 
 import 'components/add_to_cart.dart';
 import 'components/color_and_size.dart';
@@ -38,13 +39,14 @@ class DetailsScreen extends StatelessWidget {
               Navigator.pushNamed(context, 'search');
             },
           ),
-          IconButton(
-            icon: Icon(CupertinoIcons.cart),
-            // SvgPicture.asset("assets/icons/search.svg"),
-            onPressed: () {
-              Navigator.pushNamed(context, 'cartStore');
-            },
-          ),
+          if (FirebaseAuth.instance.currentUser != null)
+            IconButton(
+              icon: Icon(CupertinoIcons.cart),
+              // SvgPicture.asset("assets/icons/search.svg"),
+              onPressed: () {
+                Navigator.pushNamed(context, 'cartStore');
+              },
+            ),
           SizedBox(width: kDefaultPaddin / 2)
         ],
       ),

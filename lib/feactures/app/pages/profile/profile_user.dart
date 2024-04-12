@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pastel/feactures/app/pages/home/home_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class ProfieUser extends StatefulWidget {
   const ProfieUser({super.key});
@@ -58,44 +60,44 @@ class _ProfieUserState extends State<ProfieUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfil'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (user != null)
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                    'https://img.freepik.com/vector-premium/icono-perfil-usuario-estilo-plano-ilustracion-vector-avatar-miembro-sobre-fondo-aislado-concepto-negocio-signo-permiso-humano_157943-15752.jpg'),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if (user != null)
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: NetworkImage(
+                  'https://img.freepik.com/vector-premium/icono-perfil-usuario-estilo-plano-ilustracion-vector-avatar-miembro-sobre-fondo-aislado-concepto-negocio-signo-permiso-humano_157943-15752.jpg'),
+            ),
+          SizedBox(height: 16),
+          Text(
+            userName,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            userEmail,
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(CupertinoIcons.square_arrow_right, size: 50),
+                onPressed: () async {
+                  await _auth.signOut();
+                  await _googleSignIn.signOut();
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: HomeScreen(),
+                    withNavBar: true, // OPTIONAL VALUE. True by default.
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
+                },
               ),
-            SizedBox(height: 16),
-            Text(
-              userName,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              userEmail,
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(CupertinoIcons.square_arrow_right, size: 50),
-                  onPressed: () async {
-                    await _auth.signOut();
-                    await _googleSignIn.signOut();
-                    Navigator.pushNamed(context, 'navBar');
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

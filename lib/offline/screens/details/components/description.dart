@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pastel/models/Product.dart';
+import 'package:pastel/feactures/auth/models/Product.dart';
 
-import '../../../../../constants.dart';
+import '../../../../feactures/app/constants.dart';
 
 class DescriptionGuest extends StatelessWidget {
   const DescriptionGuest({super.key, required this.product});

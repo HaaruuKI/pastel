@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pastel/constants.dart';
-import 'package:pastel/models/Product.dart';
+import 'package:pastel/feactures/app/constants.dart';
+import 'package:pastel/feactures/auth/models/Product.dart';
 
 import 'components/add_to_cart.dart';
 import 'components/color_and_size.dart';

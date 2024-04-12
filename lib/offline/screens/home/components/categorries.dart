@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:pastel/constants.dart';
+import 'package:pastel/feactures/app/constants.dart';
 
 // We need satefull widget for our categories
 
