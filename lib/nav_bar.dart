@@ -69,8 +69,8 @@ class _NavBarState extends State<NavBar> {
   List<Widget> _buildScreens(User? user) {
     return [
       HomeScreen(),
-      OrderPage(),
-      ProfilePage(),
+      const OrderPage(),
+      const ProfilePage(),
     ];
   }
 
