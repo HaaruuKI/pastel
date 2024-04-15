@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pastel/feactures/app/constants.dart';
 import 'package:pastel/offline/screens/home/home_screen_guest.dart';
 import 'package:pastel/offline/screens/profile/profile_user_guest.dart';
 import 'package:pastel/feactures/app/pages/home/home_screen.dart';
@@ -81,11 +82,11 @@ class _NavBarState extends State<NavBar> {
         showUnselectedLabels: true,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: yellowPastel),
             label: 'Inicio',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            icon: Icon(Icons.account_circle_outlined, color: yellowPastel),
             label: 'Perfil',
           ),
         ]);
@@ -101,11 +102,11 @@ class _NavBarState extends State<NavBar> {
         showUnselectedLabels: true,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: yellowPastel),
             label: 'Inicio',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check_circle),
+            icon: Icon(Icons.check_circle, color: yellowPastel),
             label: 'Orden',
           ),
           // BottomNavigationBarItem(
@@ -113,7 +114,7 @@ class _NavBarState extends State<NavBar> {
           //   label: 'Favoritos',
           // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            icon: Icon(Icons.account_circle_outlined, color: yellowPastel),
             label: 'Perfil',
           ),
           // BottomNavigationBarItem(
