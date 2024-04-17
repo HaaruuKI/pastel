@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pastel/feactures/app/function/searchFirestore.dart';
 import 'package:pastel/feactures/app/pages/home/components/custom_app_bar.dart';
 
 class Search extends StatefulWidget {
@@ -13,8 +14,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final TextEditingController _searchController = TextEditingController();
-  List<DocumentSnapshot> _results = [];
+  final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +56,14 @@ class _SearchState extends State<Search> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         autofocus: true,
-                        controller: _searchController,
+                        controller: searchController,
                         decoration: InputDecoration(
                           hintText: 'Buscar...',
                           border: InputBorder.none,
                         ),
                         onChanged: (text) {
-                          _searchFirestore(text.toLowerCase());
+                          setState(
+                              () {}); // Trigger rebuild to update the stream
                         },
                       ),
                     ),
@@ -73,52 +74,46 @@ class _SearchState extends State<Search> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: _results.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'details', arguments: {
-                          'name': _results[index]['name'],
-                          'price': _results[index]['price'],
-                          'img': _results[index]['img_url'],
-                          'des': _results[index]['description'],
-                        });
-                      },
-                      child: ListTile(
-                        title: Text(_results[index]['name']),
-                        subtitle: Text('\$ ${_results[index]['price']}'),
-                        // trailing: Text(
-                        //   'mas detalles',
-                        //   style: TextStyle(fontSize: 15),
-                        // ),
-                      ),
-                    ),
-                  ],
-                );
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FunctionSearchFirestore.getFirestoreStream(searchController),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final _results = snapshot.data!.docs;
+                  return ListView.builder(
+                    itemCount: _results.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, 'details',
+                                  arguments: {
+                                    'name': _results[index]['name'],
+                                    'price': _results[index]['price'],
+                                    'img': _results[index]['img_url'],
+                                    'des': _results[index]['description'],
+                                  });
+                            },
+                            child: ListTile(
+                              title: Text(_results[index]['name']),
+                              subtitle: Text('\$ ${_results[index]['price']}'),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  return CircularProgressIndicator();
+                }
               },
             ),
           ),
         ],
       ),
     );
-  }
-
-  void _searchFirestore(String text) {
-    String startAt = text;
-    String endAt = '$text\uf8ff';
-
-    FirebaseFirestore.instance
-        .collection('products')
-        .where('name', isGreaterThanOrEqualTo: startAt)
-        .where('name', isLessThanOrEqualTo: endAt)
-        .get()
-        .then((querySnapshot) {
-      setState(() {
-        _results = querySnapshot.docs;
-      });
-    });
   }
 }

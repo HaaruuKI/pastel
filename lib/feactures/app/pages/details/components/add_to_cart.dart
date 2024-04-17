@@ -2,9 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pastel/feactures/app/function/addToCart.dart';
 import 'package:pastel/feactures/auth/models/Product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 import '../../../constants.dart';
 
@@ -17,32 +17,6 @@ class AddToCart extends StatefulWidget {
 }
 
 class _AddToCartState extends State<AddToCart> {
-  final firebaseDatabaseReference = FirebaseDatabase.instance.ref();
-  final firebaseAuth = FirebaseAuth.instance;
-
-  void sendDataToCart(Product product) {
-    final user = firebaseAuth.currentUser;
-    if (user != null) {
-      final userId = user.uid;
-      final productImage = product.image;
-      final productName = product.title;
-      final productPrice = product.price;
-      final productDescripcion = product.description;
-
-      firebaseDatabaseReference
-          .child('cart')
-          .child(userId)
-          .child(productName)
-          .set({
-        'image': productImage,
-        'name': productName,
-        'price': productPrice,
-        'description': productDescripcion,
-        'quantity': 1,
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -63,7 +37,7 @@ class _AddToCartState extends State<AddToCart> {
               icon: const Icon(CupertinoIcons.cart),
               onPressed: () {
                 if (FirebaseAuth.instance.currentUser != null) {
-                  sendDataToCart(widget.product);
+                  FunctionAddToCart.sendDataToCart(widget.product);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text(
@@ -83,7 +57,7 @@ class _AddToCartState extends State<AddToCart> {
             child: ElevatedButton(
               onPressed: () {
                 if (FirebaseAuth.instance.currentUser != null) {
-                  sendDataToCart(widget.product);
+                  FunctionAddToCart.sendDataToCart(widget.product);
                   Navigator.pushNamed(context, 'cartStore');
                 } else {
                   Navigator.pushNamed(context, 'profile');
