@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:pastel/feactures/auth/models/Product.dart';
 
-import '../../../../feactures/app/constants.dart';
+import '../../../constants.dart';
 
-class ProductTitleWithImageGuest extends StatelessWidget {
-  const ProductTitleWithImageGuest({super.key, required this.product});
+class ProductTitleWithImage extends StatelessWidget {
+  const ProductTitleWithImage({super.key, required this.product});
 
   final Product product;
   @override

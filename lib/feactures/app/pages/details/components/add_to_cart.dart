@@ -2,39 +2,21 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pastel/feactures/app/function/addToCart.dart';
 import 'package:pastel/feactures/auth/models/Product.dart';
-// import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../feactures/app/constants.dart';
+import '../../../constants.dart';
 
-class AddToCartGuest extends StatefulWidget {
+class AddToCart extends StatefulWidget {
   final Product product;
-  const AddToCartGuest({super.key, required this.product});
+  const AddToCart({super.key, required this.product});
 
   @override
-  State<AddToCartGuest> createState() => _AddToCartGuestState();
+  State<AddToCart> createState() => _AddToCartState();
 }
 
-class _AddToCartGuestState extends State<AddToCartGuest> {
-  // final firebaseDatabaseReference = FirebaseDatabase.instance.ref();
-
-  // void sendDataToCart(Product product) {
-  //   // final productId = product.id;
-  //   final productImage = product.image;
-  //   final productName = product.title;
-  //   final productPrice = product.price;
-  //   final productDescripcion = product.description;
-
-  //   firebaseDatabaseReference.child('cart').child(productName).set({
-  //     // 'id': productId,
-  //     'image': productImage,
-  //     'name': productName,
-  //     'price': productPrice,
-  //     'description': productDescripcion,
-  //     'quantity': 1,
-  //   });
-  // }
-
+class _AddToCartState extends State<AddToCart> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,25 +36,32 @@ class _AddToCartGuestState extends State<AddToCartGuest> {
             child: IconButton(
               icon: const Icon(CupertinoIcons.cart),
               onPressed: () {
-                Navigator.pushNamed(context, 'profileGuest');
-                // sendDataToCart(widget.product);
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //   const SnackBar(
-                //     content: Text(
-                //       'Producto agregado al carro',
-                //       style: TextStyle(color: Colors.black),
-                //     ),
-                //     backgroundColor: yellowPastel, // Change the color here
-                //   ),
-                // );
+                if (FirebaseAuth.instance.currentUser != null) {
+                  FunctionAddToCart.sendDataToCart(widget.product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Producto agregado al carro',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      backgroundColor: yellowPastel,
+                    ),
+                  );
+                } else {
+                  Navigator.pushNamed(context, 'profile');
+                }
               },
             ),
           ),
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                // sendDataToCart(widget.product);
-                Navigator.pushNamed(context, 'profileGuest');
+                if (FirebaseAuth.instance.currentUser != null) {
+                  FunctionAddToCart.sendDataToCart(widget.product);
+                  Navigator.pushNamed(context, 'cartStore');
+                } else {
+                  Navigator.pushNamed(context, 'profile');
+                }
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48),

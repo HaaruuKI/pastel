@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../feactures/app/constants.dart';
+import '../../../constants.dart';
 
-class CartCounterGuest extends StatefulWidget {
+class CartCounter extends StatefulWidget {
   @override
-  _CartCounterGuestState createState() => _CartCounterGuestState();
+  _CartCounterState createState() => _CartCounterState();
 }
 
-class _CartCounterGuestState extends State<CartCounterGuest> {
+class _CartCounterState extends State<CartCounter> {
   int numOfItems = 1;
   @override
   Widget build(BuildContext context) {

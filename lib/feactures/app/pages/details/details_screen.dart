@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pastel/feactures/app/constants.dart';
@@ -38,13 +39,14 @@ class DetailsScreen extends StatelessWidget {
               Navigator.pushNamed(context, 'search');
             },
           ),
-          // IconButton(
-          //   icon: Icon(CupertinoIcons.cart),
-          //   // SvgPicture.asset("assets/icons/search.svg"),
-          //   onPressed: () {
-          //     Navigator.pushNamed(context, 'cartStore');
-          //   },
-          // ),
+          if (FirebaseAuth.instance.currentUser != null)
+            IconButton(
+              icon: Icon(CupertinoIcons.cart),
+              // SvgPicture.asset("assets/icons/search.svg"),
+              onPressed: () {
+                Navigator.pushNamed(context, 'cartStore');
+              },
+            ),
           SizedBox(width: kDefaultPaddin / 2)
         ],
       ),
@@ -72,17 +74,17 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     child: Column(
                       children: <Widget>[
-                        ColorAndSizeGuest(product: product),
+                        ColorAndSize(product: product),
                         SizedBox(height: kDefaultPaddin / 2),
-                        DescriptionGuest(product: product),
+                        Description(product: product),
                         SizedBox(height: kDefaultPaddin / 2),
-                        AddToCartGuest(product: product),
+                        AddToCart(product: product),
                         SizedBox(height: kDefaultPaddin / 2),
                         CounterWithFavBtn(),
                       ],
                     ),
                   ),
-                  ProductTitleWithImageGuest(product: product)
+                  ProductTitleWithImage(product: product)
                 ],
               ),
             )

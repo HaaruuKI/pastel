@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pastel/feactures/auth/models/Product.dart';
 
-import '../../../../feactures/app/constants.dart';
+import '../../../constants.dart';
 
-class DescriptionGuest extends StatelessWidget {
-  const DescriptionGuest({super.key, required this.product});
+class Description extends StatelessWidget {
+  const Description({super.key, required this.product});
 
   final Product product;
   @override

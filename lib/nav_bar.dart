@@ -1,9 +1,14 @@
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pastel/feactures/app/constants.dart';
 import 'package:pastel/offline/screens/home/home_screen_guest.dart';
 import 'package:pastel/offline/screens/profile/profile_user_guest.dart';
-import 'package:pastel/online/screens/home/home_screen.dart';
-import 'package:pastel/online/screens/profile/profile_user.dart';
+import 'package:pastel/feactures/app/pages/home/home_screen.dart';
+import 'package:pastel/feactures/app/pages/order/order_page.dart';
+import 'package:pastel/feactures/app/pages/profile/profile_user.dart';
+//Importando las 'Pages' tab.
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -16,6 +21,10 @@ class _NavBarState extends State<NavBar> {
   //Arreglo de objetos.
   final List<Widget> _widgetOptions = [
     HomeScreen(),
+<<<<<<< HEAD
+=======
+    OrderPage(),
+>>>>>>> refs/remotes/origin/main
     const ProfieUser(),
   ];
 
@@ -76,11 +85,11 @@ class _NavBarState extends State<NavBar> {
         showUnselectedLabels: true,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: yellowPastel),
             label: 'Inicio',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            icon: Icon(Icons.account_circle_outlined, color: yellowPastel),
             label: 'Perfil',
           ),
         ]);
@@ -96,19 +105,19 @@ class _NavBarState extends State<NavBar> {
         showUnselectedLabels: true,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: yellowPastel),
             label: 'Inicio',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.check_box_rounded),
-          //   label: 'Mi orden',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_circle, color: yellowPastel),
+            label: 'Orden',
+          ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.bolt_rounded),
           //   label: 'Favoritos',
           // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            icon: Icon(Icons.account_circle_outlined, color: yellowPastel),
             label: 'Perfil',
           ),
           // BottomNavigationBarItem(
