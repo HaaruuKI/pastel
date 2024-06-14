@@ -10,9 +10,9 @@ class CreateProductPage extends StatefulWidget {
 }
 
 class _CreateProductPageState extends State<CreateProductPage> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   Uint8List? _fileBytes;
   String? _fileName;
   String? _imageUrl;

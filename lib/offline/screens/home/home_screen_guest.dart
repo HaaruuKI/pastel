@@ -22,7 +22,7 @@ class HomeScreenGuest extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CustomAppBarGuest(),
+              const CustomAppBarGuest(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
                 child: Text(

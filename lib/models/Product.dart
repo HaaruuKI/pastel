@@ -35,9 +35,9 @@ Future<List<Product>> getProductsFromFirestore() async {
   List<Product> products = [];
   QuerySnapshot querySnapshot =
       await FirebaseFirestore.instance.collection('products').get();
-  querySnapshot.docs.forEach((doc) {
+  for (var doc in querySnapshot.docs) {
     products.add(Product.fromFirestore(doc));
-  });
+  }
   return products;
 }
 

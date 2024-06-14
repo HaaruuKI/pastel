@@ -16,12 +16,12 @@ class _NavBarState extends State<NavBar> {
   //Arreglo de objetos.
   final List<Widget> _widgetOptions = [
     HomeScreen(),
-    ProfieUser(),
+    const ProfieUser(),
   ];
 
   final List<Widget> _widgetOptionsGuest = [
     HomeScreenGuest(),
-    ProfileUserGuest(),
+    const ProfileUserGuest(),
   ];
 
   //declaracion variable tipo entero para jugar con los indices del arreglo.
